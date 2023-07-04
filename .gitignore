@@ -36,3 +36,7 @@ lerna-debug.log*
 
 # Docker
 data
+
+# Environment variables
+.env*
+!.env.example

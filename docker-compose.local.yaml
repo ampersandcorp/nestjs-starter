@@ -20,7 +20,7 @@ services:
       - "start:local:dev"
 
   mongodb:
-    container_name: api-mongo
+    container_name: api_mongo
     image: mongo:4.2.1
     ports:
       - "27017:27017"
@@ -33,7 +33,7 @@ services:
       MONGO_INITDB_DATABASE: api
 
   mysql:
-    container_name: api-mysql
+    container_name: api_mysql
     image: mysql:8.0
     ports:
       - "3306:3306"
