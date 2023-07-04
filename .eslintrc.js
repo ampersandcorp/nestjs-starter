@@ -16,7 +16,11 @@ module.exports = {
     node: true,
     jest: true,
   },
-  ignorePatterns: ['.eslintrc.js'],
+  ignorePatterns: [
+    '.eslintrc.js',
+    "src/**/*.spec.ts",
+    "tests/**/*.ts",
+  ],
   rules: {
     'init-declarations': 'off',
     'no-dupe-class-members': 'off',

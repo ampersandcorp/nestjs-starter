@@ -67,10 +67,5 @@
     ],
     "coverageDirectory": "../coverage",
     "testEnvironment": "node"
-  },
-  "eslintConfig": {
-    "ignorePatterns": [
-      "src/**/*.spec.ts"
-    ]
   }
 }
