@@ -4,7 +4,7 @@ import * as path from 'path';
 dotenv.config({
   path: path.resolve(
     (process.env.NODE_ENV === 'production')
-      ? '.env.production'
+      ? '.env'
       : '.env.development',
   ),
 });
@@ -15,6 +15,8 @@ function required<T>(key: string, defaultValue = ''): T {
   }
   return process.env[key] as T || defaultValue as T;
 }
+
+export const IS_PRODUCTION = process.env.NODE_ENV === 'production';
 
 export const config = {
   NODE_ENV: required<string>('NODE_ENV'),
