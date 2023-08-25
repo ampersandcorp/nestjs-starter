@@ -33,4 +33,5 @@ export const config = {
     PASSWORD: required<string>('MYSQL_PASSWORD'),
     DATABASE: required<string>('MYSQL_DATABASE'),
   },
+  JWT_SECRET: required<string>('JWT_SECRET'),
 };
