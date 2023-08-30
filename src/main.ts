@@ -1,7 +1,8 @@
 import { NestFactory } from '@nestjs/core';
-import { AppModule } from './app.module';
 import { DocumentBuilder, SwaggerCustomOptions, SwaggerModule } from '@nestjs/swagger';
 import { INestApplication } from '@nestjs/common';
+import { AppModule } from './app.module';
+import { HttpLoggingInterceptor } from './shared/interceptors/HttpLoggingInterceptor';
 
 function setupSwaggerDocument(app: INestApplication): void {
   const config = new DocumentBuilder()
@@ -24,10 +25,10 @@ function setupSwaggerDocument(app: INestApplication): void {
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  const port = 80;
+  app.useGlobalInterceptors(new HttpLoggingInterceptor());
 
   setupSwaggerDocument(app);
 
-  await app.listen(port);
+  await app.listen(80);
 }
 bootstrap();
