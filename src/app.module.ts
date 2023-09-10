@@ -22,7 +22,7 @@ import { config } from './config';
         __dirname + '/**/entities/*View{.ts,.js}',
       ],
       charset: 'utf8mb4',
-      logging: [],
+      logging: true,
     }),
   ],
   controllers: [AppController],
