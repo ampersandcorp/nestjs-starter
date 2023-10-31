@@ -26,6 +26,7 @@ function setupSwaggerDocument(app: INestApplication): void {
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.useGlobalInterceptors(new HttpLoggingInterceptor());
+  app.getHttpAdapter().getInstance().disable('x-powered-by');
 
   setupSwaggerDocument(app);
 
