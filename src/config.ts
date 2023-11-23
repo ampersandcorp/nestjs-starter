@@ -20,12 +20,6 @@ export const IS_PRODUCTION = process.env.NODE_ENV === 'production';
 
 export const config = {
   NODE_ENV: required<string>('NODE_ENV'),
-  MONGO: {
-    HOST: required<string>('MONGO_HOST'),
-    USER: required<string>('MONGO_USER'),
-    PASSWORD: required<string>('MONGO_PASSWORD'),
-    DATABASE: required<string>('MONGO_DATABASE'),
-  },
   MYSQL: {
     HOST: required<string>('MYSQL_HOST'),
     PORT: required<number>('MYSQL_PORT'),

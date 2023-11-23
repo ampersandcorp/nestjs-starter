@@ -8,7 +8,6 @@ services:
     container_name: api
     restart: unless-stopped
     depends_on:
-      - mongodb
       - mysql
     ports:
       - '80:80'
@@ -20,19 +19,6 @@ services:
       - "npm"
       - "run"
       - "start:local:dev"
-
-  mongodb:
-    container_name: api_mongodb
-    image: mongo:4.2.1
-    ports:
-      - "27017:27017"
-    restart: on-failure
-    volumes:
-      - ./data/db:/data/db
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: api
-      MONGO_INITDB_ROOT_PASSWORD: apipass
-      MONGO_INITDB_DATABASE: api
 
   mysql:
     container_name: api_mysql
