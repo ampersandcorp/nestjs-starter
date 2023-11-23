@@ -1,5 +1,5 @@
 import { Request } from 'express';
-import * as jwt from 'jsonwebtoken';
+import jwt from 'jsonwebtoken';
 import { JsonWebTokenError, JwtPayload, TokenExpiredError } from 'jsonwebtoken';
 import { Strategy } from 'passport-custom';
 import { PassportStrategy } from '@nestjs/passport';

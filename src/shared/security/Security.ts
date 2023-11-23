@@ -1,4 +1,4 @@
-import * as crypto from 'crypto';
+import crypto from 'crypto';
 
 const secret = 'LbN7bBGaYmNmcPNUrPKs2wTPvPT7cyew';
 
