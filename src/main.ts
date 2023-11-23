@@ -24,6 +24,8 @@ function setupSwaggerDocument(app: INestApplication): void {
 }
 
 async function bootstrap() {
+  process.env.TZ = 'Asia/Seoul';
+
   const app = await NestFactory.create(AppModule);
   app.useGlobalInterceptors(new HttpLoggingInterceptor());
   app.getHttpAdapter().getInstance().disable('x-powered-by');
