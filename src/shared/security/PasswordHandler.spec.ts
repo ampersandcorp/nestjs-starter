@@ -7,7 +7,7 @@ describe('PasswordHandler', () => {
   });
   it('should compare a password', async () => {
     const hashedPassword = await PasswordHandler.hashPassword('password');
-    const isSame = await PasswordHandler.comparePasswords('password', hashedPassword);
+    const isSame = await PasswordHandler.comparePassword('password', hashedPassword);
     expect(isSame).toBe(true);
   });
 });

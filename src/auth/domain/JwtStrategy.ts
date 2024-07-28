@@ -7,8 +7,16 @@ import { BadRequestException, Injectable, UnauthorizedException } from '@nestjs/
 
 import { config } from '../../config';
 
-export const AUTH_HEADER = 'X-Inevitable-Auth-Key';
+export const AUTH_HEADER = 'X-Custom-Key';
 const JWT_SECRET = config.JWT_SECRET;
+
+export interface InternalJwtPayload extends JwtPayload {
+  username: string;
+  id: number;
+  email: string;
+  isApproved: boolean;
+  scope: string;
+}
 
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy, 'jwt') {
@@ -16,28 +24,33 @@ export class JwtStrategy extends PassportStrategy(Strategy, 'jwt') {
     super();
   }
 
-  async validate(request: Request) {
-    const token = (request.headers[AUTH_HEADER.toLowerCase()] ?? '') as string;
+  async validate(request: Request): Promise<InternalJwtPayload> {
+    const token = (request.header(AUTH_HEADER.toLowerCase()) ?? '') as string;
+
     if (!token) {
-      throw new UnauthorizedException();
+      throw new UnauthorizedException('MissingToken');
     }
 
     try {
       jwt.verify(token, JWT_SECRET);
-      const payload = jwt.decode(token) as JwtPayload;
+      const payload = jwt.decode(token) as InternalJwtPayload;
 
-      if (!payload.sub) {
+      if (!payload.username || !payload.id || !payload.email || typeof payload.isApproved === 'undefined') {
         throw new BadRequestException('InvalidPayload');
       }
 
-      return payload.sub;
+      if (!payload.isApproved) {
+        throw new UnauthorizedException('ApprovalRequired');
+      }
+
+      return { username: payload.username, id: payload.id, email: payload.email, isApproved: payload.isApproved, scope: payload.scope };
     } catch (e) {
       if (e instanceof SyntaxError) {
         throw new BadRequestException('InvalidJSONObject');
       } else if (e instanceof TokenExpiredError) {
         throw new UnauthorizedException('ExpiredToken');
       } else if (e instanceof JsonWebTokenError) {
-        throw new BadRequestException(e.message); // invalid signature | invalid token
+        throw new BadRequestException('InvalidToken');
       }
 
       throw e;

@@ -40,3 +40,5 @@ data
 # Environment variables
 .env*
 !.env.example
+.docker.env*
+!.docker.env.example

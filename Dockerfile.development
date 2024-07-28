@@ -20,7 +20,7 @@ RUN apk update && \
   apk add --no-cache chromium fontconfig font-noto-cjk && \
   fc-cache -f -v
 ENV CHROMIUM_LINUX_PATH /usr/bin/chromium-browser
-ENV NODE_ENV="production"
+ENV NODE_ENV="development"
 CMD ["node", "dist/main"]
 
 EXPOSE 80

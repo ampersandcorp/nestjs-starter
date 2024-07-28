@@ -1,0 +1,36 @@
+services:
+  server:
+    build:
+      dockerfile: Dockerfile.local
+      context: ./
+    container_name: api
+    restart: unless-stopped
+    depends_on:
+      - sshtunnel
+    ports:
+      - '80:80'
+    volumes:
+      - ./src:/app/src
+    command:
+      - "npm"
+      - "run"
+      - "start:local:prod"
+
+  sshtunnel:
+    container_name: sshtunnel
+    image: jossec101/sshtunneller
+    expose:
+      - 25001 # database
+    environment:
+      - "ssh_host=${SSH_HOST}"
+      - "ssh_port=${SSH_PORT}"
+      - "ssh_username=${SSH_USERNAME}"
+      - "ssh_password=${SSH_PASSWORD}"
+      - "remote_bind_addresses=[('${DATABASE_HOST}', ${DATABASE_PORT})]"
+      - "local_bind_addresses=[('0.0.0.0', 25001)]"
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "20m"
+        max-file: "3"
+    restart: unless-stopped

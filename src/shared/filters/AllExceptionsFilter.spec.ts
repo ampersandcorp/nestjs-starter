@@ -65,7 +65,7 @@ describe('AllExceptionsFilter', () => {
     expect(mockHttpArgumentsHost).toBeCalledWith();
     expect(mockGetResponse).toBeCalledTimes(1);
     expect(mockGetResponse).toBeCalledWith();
-    expect(mockGetRequest).toBeCalledTimes(1);
+    expect(mockGetRequest).toBeCalledTimes(3);
     expect(mockGetRequest).toBeCalledWith();
     expect(mockStatus).toBeCalledTimes(1);
     expect(mockStatus).toBeCalledWith(HttpStatus.BAD_REQUEST);

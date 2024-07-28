@@ -1,2 +1,4 @@
 * linguist-vendored
 src/* linguist-vendored=false
+scheme/* linguist-vendored=false
+.github/* linguist-vendored=false
