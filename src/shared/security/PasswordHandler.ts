@@ -6,7 +6,7 @@ export class PasswordHandler {
     return await bcrypt.hash(password, saltRounds);
   }
 
-  static async comparePassword(candidatePassword: string, hashedPassword: string): Promise<boolean> {
+  static async comparePasswords(candidatePassword: string, hashedPassword: string): Promise<boolean> {
     return await bcrypt.compare(candidatePassword, hashedPassword);
   }
 }
