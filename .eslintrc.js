@@ -33,6 +33,16 @@ module.exports = {
     'semi': 'off',
     'quotes': 'off',
     'brace-style': 'off',
+    'comma-dangle': [
+      'error',
+      {
+        'arrays': 'always-multiline',
+        'objects': 'always-multiline',
+        'imports': 'always-multiline',
+        'exports': 'always-multiline',
+        'functions': 'always-multiline',
+      },
+    ],
     '@typescript-eslint/dot-notation': 'error',
     '@typescript-eslint/explicit-function-return-type': 'error',
     "@typescript-eslint/init-declarations": "warn",
@@ -125,7 +135,7 @@ module.exports = {
       }
     ],
     '@typescript-eslint/no-unnecessary-condition': 'warn',
-    '@typescript-eslint/no-unnecessary-type-arguments': 'error',
+    '@typescript-eslint/no-unnecessary-type-arguments': 'off',
     '@typescript-eslint/no-unused-vars': 'error',
     '@typescript-eslint/no-useless-empty-export': 'error',
     '@typescript-eslint/no-useless-constructor': 'off',

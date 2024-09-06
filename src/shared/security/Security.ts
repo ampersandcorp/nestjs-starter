@@ -1,7 +1,7 @@
 import crypto from 'crypto';
 import { config } from '../../config';
 
-const secret = config.AES_SECRET;
+const secret = config.AES_SECRET || 'ThisIsSample32LengthSecretString';
 
 const secretKey = Buffer.from(secret, 'utf-8');
 const iv = Buffer.from(secret.slice(0, 16), 'utf-8');

@@ -21,8 +21,8 @@ dotenv.config({
   path: path.resolve(getEnvironmentFilePath()),
 });
 
-function required<T>(key: string, defaultValue = ''): T {
-  if (!process.env[key] && typeof defaultValue === 'undefined') {
+function required<T>(key: string, defaultValue?: string): T {
+  if (!IS_TEST && (typeof process.env[key] === 'undefined' && typeof defaultValue === 'undefined' || process.env[key] === '')) {
     throw new Error('Missing required environment variable: ' + key);
   }
   return process.env[key] as T || defaultValue as T;
@@ -34,9 +34,23 @@ export const IS_LOCAL = process.env.NODE_ENV ? process.env.NODE_ENV.toString().s
 
 export const config = {
   NODE_ENV: required<string>('NODE_ENV'),
+  MYSQL: {
+    HOST: required<string>('MYSQL_HOST'),
+    PORT: required<number>('MYSQL_PORT'),
+    USER: required<string>('MYSQL_USER'),
+    PASSWORD: required<string>('MYSQL_PASSWORD'),
+    DATABASE: required<string>('MYSQL_DATABASE'),
+  },
   JWT_SECRET: required<string>('JWT_SECRET'),
   AES_SECRET: required<string>('AES_SECRET'),
+  AWS: {
+    CLOUDWATCH: {
+      ACCESS_KEY_ID: required<string>('AWS_CLOUDWATCH_ACCESS_KEY_ID'),
+      SECRET_ACCESS_KEY: required<string>('AWS_CLOUDWATCH_SECRET_ACCESS_KEY'),
+    },
+  },
 };
 
 console.log(`[CONFIGURATION] Initialized from ${getEnvironmentFilePath()}`);
 console.log(`[CONFIGURATION] RUNNING NODE ENV: ${config.NODE_ENV}`);
+console.log(`[CONFIGURATION] RUNNING MYSQL DB HOST: ${config.MYSQL.HOST}`);
