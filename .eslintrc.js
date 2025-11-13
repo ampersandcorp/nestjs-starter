@@ -5,9 +5,13 @@ module.exports = {
     project: './tsconfig.json',
     tsconfigRootDir: __dirname,
     ecmaVersion: 'latest',
-    sourceType: "module",
+    sourceType: 'module',
   },
-  plugins: ['@typescript-eslint/eslint-plugin'],
+  plugins: [
+    '@typescript-eslint/eslint-plugin',
+    'eslint-plugin-import',
+    'unused-imports',
+  ],
   extends: [
     'plugin:@typescript-eslint/strict',
     'plugin:@typescript-eslint/recommended',
@@ -18,9 +22,8 @@ module.exports = {
   },
   ignorePatterns: [
     '.eslintrc.js',
-    "src/**/*.spec.ts",
-    "tests/**/*.ts",
-    "src/**/*Controller.ts",
+    'src/**/*.spec.ts',
+    'tests/**/*.ts',
   ],
   rules: {
     'init-declarations': 'off',
@@ -43,10 +46,11 @@ module.exports = {
         'functions': 'always-multiline',
       },
     ],
+    'object-curly-spacing': ['error', 'always'],
     '@typescript-eslint/dot-notation': 'error',
     '@typescript-eslint/explicit-function-return-type': 'error',
-    "@typescript-eslint/init-declarations": "warn",
-    "@typescript-eslint/no-empty-interface": "off",
+    '@typescript-eslint/init-declarations': 'warn',
+    '@typescript-eslint/no-empty-interface': 'off',
     '@typescript-eslint/member-delimiter-style': [
       'error',
       {
@@ -125,14 +129,14 @@ module.exports = {
       'error',
       {
         'allowAliases': 'always',
-        'allowCallbacks': 'never',
+        'allowCallbacks': 'always',
         'allowConditionalTypes': 'always',
         'allowConstructors': 'never',
-        'allowLiterals': 'never',
+        'allowLiterals': 'always',
         'allowMappedTypes': 'always',
         'allowTupleTypes': 'always',
         'allowGenerics': 'always',
-      }
+      },
     ],
     '@typescript-eslint/no-unnecessary-condition': 'warn',
     '@typescript-eslint/no-unnecessary-type-arguments': 'off',
@@ -152,7 +156,7 @@ module.exports = {
     '@typescript-eslint/promise-function-async': 'off',
     '@typescript-eslint/quotes': [
       'error',
-      'single'
+      'single',
     ],
     '@typescript-eslint/semi': 'error',
     '@typescript-eslint/switch-exhaustiveness-check': 'error',
@@ -164,5 +168,52 @@ module.exports = {
         'allowSingleLine': true,
       },
     ],
+    'import/newline-after-import': 'error',
+    'import/order': [
+      'error',
+      {
+        'newlines-between': 'never',
+        groups: [
+          'builtin',
+          'external',
+          'internal',
+          'parent',
+          'sibling',
+        ],
+        pathGroups: [
+          {
+            pattern: '@nestjs/**',
+            group: 'external',
+            position: 'after',
+          },
+          {
+            pattern: '@shared/**',
+            group: 'internal',
+            position: 'before',
+          },
+        ],
+        pathGroupsExcludedImportTypes: ['@shared/**'],
+      },
+    ],
+    'unused-imports/no-unused-imports': 'error',
+    'unused-imports/no-unused-vars': [
+      'warn',
+      {
+        vars: 'all',
+        varsIgnorePattern: '^_',
+        args: 'after-used',
+        argsIgnorePattern: '^_',
+      },
+    ],
   },
+  overrides: [
+    {
+      files: ['src/**/*Controller.ts'],
+      rules: {
+        '@typescript-eslint/explicit-function-return-type': 'off',
+        '@typescript-eslint/no-unused-vars': 'off',
+        'unused-imports/no-unused-vars': 'off',
+      },
+    },
+  ],
 };

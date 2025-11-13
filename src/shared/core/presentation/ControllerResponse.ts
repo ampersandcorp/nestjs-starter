@@ -19,9 +19,18 @@ export class ControllerResponseErrorObject {
 
 export class ControllerResponse {
   @ApiProperty({
+    name: 'traceId',
+    description: 'Trace ID',
+    required: true,
+    example: '7234527811174666241',
+  })
+  traceId: string;
+
+  @ApiProperty({
     name: 'statusCode',
     description: 'HTTP status code',
     required: true,
+    example: 200,
   })
   statusCode: number;
 
@@ -29,6 +38,7 @@ export class ControllerResponse {
     name: 'timestamp',
     description: 'Response timestamp (ISO)',
     required: true,
+    example: '2024-01-01T00:00:00.000Z',
   })
   timestamp: string;
 
@@ -36,15 +46,9 @@ export class ControllerResponse {
     name: 'path',
     description: 'Requested path',
     required: true,
+    example: '/',
   })
   path: string;
-
-  @ApiProperty({
-    name: 'trackingId',
-    description: 'Tracking ID',
-    required: false,
-  })
-  trackingId?: string;
 
   @ApiProperty({
     name: 'ok',

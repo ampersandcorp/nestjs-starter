@@ -34,6 +34,11 @@
     "noUncheckedIndexedAccess": true,
     "esModuleInterop": true,
     "types": ["node", "jest", "express"],
-    "typeRoots": ["src/@types", "node_modules/@types"]
+    "typeRoots": ["src/@types", "node_modules/@types"],
+    "paths": {
+      "@shared/*": [
+        "src/shared/*"
+      ]
+    }
   }
 }

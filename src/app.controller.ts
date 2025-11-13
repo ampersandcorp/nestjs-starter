@@ -2,7 +2,7 @@ import { Controller, Get, Header } from '@nestjs/common';
 import { ApiOkResponse, ApiOperation, ApiProduces, ApiTags } from '@nestjs/swagger';
 
 @Controller()
-@ApiTags('Misc')
+@ApiTags('System')
 export class AppController {
   @Get()
   @Header('Content-Type', 'text/plain; charset=utf-8')

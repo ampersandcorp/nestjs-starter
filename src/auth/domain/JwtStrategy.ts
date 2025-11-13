@@ -4,8 +4,7 @@ import { JsonWebTokenError, JwtPayload, TokenExpiredError } from 'jsonwebtoken';
 import { Strategy } from 'passport-custom';
 import { PassportStrategy } from '@nestjs/passport';
 import { BadRequestException, Injectable, UnauthorizedException } from '@nestjs/common';
-
-import { config } from '../../config';
+import { config } from '@shared/config/config';
 
 export const AUTH_HEADER = 'X-Custom-Key';
 const JWT_SECRET = config.JWT_SECRET;

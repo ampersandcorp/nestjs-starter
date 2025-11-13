@@ -39,14 +39,11 @@ jobs:
           IMAGE_TAG: ${{ steps.vars.outputs.rev_sha }}
           NODE_ENV: development
           JWT_SECRET: ${{ secrets.JWT_SECRET }}
-          AES_SECRET: ${{ secrets.AES_SECRET }}
           MYSQL_HOST: ${{ secrets.MYSQL_HOST }}
           MYSQL_PORT: ${{ secrets.MYSQL_PORT }}
           MYSQL_USER: ${{ secrets.MYSQL_USER }}
           MYSQL_PASSWORD: ${{ secrets.MYSQL_PASSWORD }}
           MYSQL_DATABASE: ${{ secrets.MYSQL_DATABASE }}
-          AWS_CLOUDWATCH_ACCESS_KEY_ID: ${{ secrets.AWS_CLOUDWATCH_ACCESS_KEY_ID }}
-          AWS_CLOUDWATCH_SECRET_ACCESS_KEY: ${{ secrets.AWS_CLOUDWATCH_SECRET_ACCESS_KEY }}
 
         run: |
           cat .env.example | envsubst > .env

@@ -1,5 +1,5 @@
-import dotenv from 'dotenv';
 import path from 'path';
+import dotenv from 'dotenv';
 
 function getEnvironmentFilePath(): string {
   switch (process.env.NODE_ENV) {
@@ -42,13 +42,6 @@ export const config = {
     DATABASE: required<string>('MYSQL_DATABASE'),
   },
   JWT_SECRET: required<string>('JWT_SECRET'),
-  AES_SECRET: required<string>('AES_SECRET'),
-  AWS: {
-    CLOUDWATCH: {
-      ACCESS_KEY_ID: required<string>('AWS_CLOUDWATCH_ACCESS_KEY_ID'),
-      SECRET_ACCESS_KEY: required<string>('AWS_CLOUDWATCH_SECRET_ACCESS_KEY'),
-    },
-  },
 };
 
 console.log(`[CONFIGURATION] Initialized from ${getEnvironmentFilePath()}`);
