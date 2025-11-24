@@ -18,12 +18,11 @@ export class AllExceptionsFilter implements ExceptionFilter {
     const httpResponse = ctx.getResponse();
 
     const httpMethod = httpRequest.method;
-    // const httpBody = httpRequest.body;
     const httpUrl = httpAdapter.getRequestUrl(httpRequest);
 
     const stack = exception instanceof Error ? exception.stack : exception as string;
+    const errorName = exception instanceof Error ? exception.name : '';
     const errorMessage = exception instanceof Error ? exception.message : '';
-    // const errorName = exception instanceof Error ? exception.name : '';
 
     const traceId = httpRequest.headers[TRACE_ID_HEADER_KEY] || '';
 
@@ -34,11 +33,13 @@ export class AllExceptionsFilter implements ExceptionFilter {
       path: httpUrl,
       ok: false,
       error: {
+        name: errorName,
         message: errorMessage,
         stack: this.needToShowStack() && stack
           ? stack
             .toString()
             .split('\n')
+            .slice(1)
             .map(line => line.trim())
           : [],
       },
