@@ -20,7 +20,7 @@ export abstract class AggregateRoot<T extends AggregateObjectProps> {
     return this._id;
   }
 
-  get domainEvents(): DomainEvent[] {
+  get domainEvents(): readonly DomainEvent[] {
     return this._domainEvents;
   }
 
